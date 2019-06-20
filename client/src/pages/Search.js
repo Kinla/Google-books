@@ -20,7 +20,6 @@ class Search extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault()
     const bookTitle = this.state.bookTitle.split(" ").join("+")
-    console.log(bookTitle)
 
     API.search(bookTitle)
       .then(res => {
@@ -28,7 +27,6 @@ class Search extends Component {
         res.data.items.forEach(el => {
           let book = {}
           let entry = el.volumeInfo
-          console.log(el)
           book.id = el.id
           book.title = entry.title
           book.description = entry.description
@@ -39,11 +37,11 @@ class Search extends Component {
           } else {
             book.author = entry.authors
           }
+          book.saved = false
           for(var key in book){
-            book[key] = (book[key] !== undefined) ? book[key] : '';
+            book[key] = (book[key] !== undefined) ? book[key] : 'Not available';
         }
           results.push(book)
-          console.log(results)
       });
         this.setState({results: results})
       })
@@ -51,7 +49,39 @@ class Search extends Component {
 
     this.setState({bookTitle: ""})
   }
-      
+  
+  handleBookSave = (e) => {
+    e.preventDefault()
+    let id = e.target.id
+    let newResults = this.state.results.map(el => {
+      if (el.id === id){
+        el.saved = true
+        API.saveBook(el)
+          .then(res => console.log(`This is added to libary: ${res.data}`))
+      }
+      return el
+    })
+    this.setState({results: newResults})
+    console.log('saved')
+  }
+
+  handleBookUnsave = (e) => {
+    e.preventDefault()
+    let id = e.target.id
+    let newResults = this.state.results.map(el => {
+      if (el.id === id){
+        el.saved = false
+        API.unsaveBook(id)
+          .then(res => console.log(`This is removed from libary: ${res.data}`))
+      }
+      return el
+    })
+    this.setState({results: newResults})
+    console.log('unsaved')
+  }
+
+
+
   render() {
     return (
     <div>
@@ -70,7 +100,7 @@ class Search extends Component {
                 <MDBCardTitle className="h5 mb-3">Results</MDBCardTitle>
                 <MDBContainer>
                     <MDBRow>
-                        {this.state.results.map(el => <Card key={el.id} id={el.id} title={el.title} description={el.description} author={el.author} image={el.image} link={el.link}/>)}
+                        {this.state.results.map(el => <Card key={el.id} id={el.id} title={el.title} description={el.description} author={el.author} image={el.image} link={el.link} saved={el.saved} bookSave={this.handleBookSave} bookUnsave={this.handleBookUnsave}/>)}
                     </MDBRow>
                 </MDBContainer>
             </MDBCardBody>

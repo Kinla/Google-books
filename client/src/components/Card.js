@@ -11,9 +11,8 @@ const Card = (props) => {
             <div>
               <MDBBtn size="sm" className="p-2 rounded-pill" href={props.link} target="_blank"><i class="fas fa-book-open"></i></MDBBtn>
             </div>
-            <div>
-              <MDBBtn size="sm" className="p-2 rounded-pill" href="#" id={props.id}><i class="fas fa-bookmark"></i></MDBBtn>
-            </div>
+              {props.saved && <div><MDBBtn size="sm" className="p-2 rounded-pill" id={props.id} onClick={(e) => {props.bookUnsave(e)}}><i class="fas fa-bookmark"></i></MDBBtn></div>}
+              {!props.saved && <div><MDBBtn size="sm" className="p-2 rounded-pill"><i class="far fa-bookmark" id={props.id} onClick={(e) => {props.bookSave(e)}}></i></MDBBtn></div>}
           </div>    
             <MDBCardText>
                 {props.author}
