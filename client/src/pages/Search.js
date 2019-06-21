@@ -51,7 +51,6 @@ class Search extends Component {
   }
   
   handleBookSave = (e) => {
-    e.preventDefault()
     let id = e.target.id
     let newResults = this.state.results.map(el => {
       if (el.id === id){
@@ -66,7 +65,6 @@ class Search extends Component {
   }
 
   handleBookUnsave = (e) => {
-    e.preventDefault()
     let id = e.target.id
     let newResults = this.state.results.map(el => {
       if (el.id === id){
@@ -89,7 +87,7 @@ class Search extends Component {
       <MDBContainer className="pb-4">
         <MDBCard className="mb-5">
             <MDBCardBody>
-            <MDBCardTitle className="h5">Search</MDBCardTitle>
+            <MDBCardTitle className="h5 cyan-text"><strong>Search</strong></MDBCardTitle>
                 <MDBContainer>
                     <Form title={this.state.bookTitle} onChange={this.handleOnChange} onClick={this.handleFormSubmit}/>
                 </MDBContainer>
@@ -97,9 +95,10 @@ class Search extends Component {
         </MDBCard>
         <MDBCard>
             <MDBCardBody>
-                <MDBCardTitle className="h5 mb-3">Results</MDBCardTitle>
+                <MDBCardTitle className="h5 mb-3 cyan-text"><strong>Results</strong></MDBCardTitle>
                 <MDBContainer>
                     <MDBRow>
+                        {this.state.results.length === 0 && <p>Book list empty. Please submit a new query.</p>}
                         {this.state.results.map(el => <Card key={el.id} id={el.id} title={el.title} description={el.description} author={el.author} image={el.image} link={el.link} saved={el.saved} bookSave={this.handleBookSave} bookUnsave={this.handleBookUnsave}/>)}
                     </MDBRow>
                 </MDBContainer>

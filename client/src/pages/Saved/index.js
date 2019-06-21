@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { MDBCard, MDBCardBody,  MDBCardTitle, MDBContainer, MDBRow } from 'mdbreact';
-import Card from "../components/Card"
-import API from "../util/API"
+import Card from "../../components/Card"
+import API from "../../util/API"
+import "./style.css"
 
 class Search extends Component {
 
@@ -60,10 +61,10 @@ class Search extends Component {
   render() {
     return (
     <div className="h-100">
-      <MDBContainer className="pb-4 mt-5 h-100">
-        <MDBCard classname="">
+    <MDBContainer className="pb-4 mt-5 mainContainer">
+        <MDBCard className="">
             <MDBCardBody>
-                <MDBCardTitle className="h5 mb-3">My Reading Nook</MDBCardTitle>
+                <MDBCardTitle className="h5 mb-3 cyan-text"><strong>My Book Nook</strong></MDBCardTitle>
                 <MDBContainer >
                     <MDBRow>
                         {this.state.library.length === 0 && <p>Add some books to your library and start reading.</p>}

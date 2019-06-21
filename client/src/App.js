@@ -4,7 +4,7 @@ import "./App.css";
 import Nav from "./components/Nav"
 import Footer from "./components/Footer"
 import Search from "./pages/Search"
-import Saved from "./pages/Saved"
+import Saved from "./pages/Saved/index"
 
 class App extends Component {
   render() {
