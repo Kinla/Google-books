@@ -5,13 +5,19 @@ import Form from "../components/Form"
 import Card from "../components/Card"
 import Alert from "../components/Alert"
 import API from "../util/API"
+import io from "socket.io-client"
+
+const socket = io("http://localhost:3001")
 
 class Search extends Component {
 
   state = {
     bookTitle: "",
-    results: []
+    results: [],
+    savedTitle: "",
+    savedLink: ""
   }
+
 
   handleOnChange = (event) => {
     const {value} = event.target
@@ -58,7 +64,8 @@ class Search extends Component {
         el.saved = true
         API.saveBook(el)
           .then(res => console.log(`This is added to libary: ${res.data}`))
-      }
+        socket.emit("saveBook", el)
+        }
       return el
     })
     this.setState({results: newResults})
@@ -77,11 +84,19 @@ class Search extends Component {
     this.setState({results: newResults})
   }
 
-
+  componentDidMount() {
+    socket.on("broadcast", data => {
+      this.setState({
+        savedTitle: data.title, 
+        savedLink: data.link,
+      })
+    })
+  }
 
   render() {
     return (
     <div>
+      <Alert title={this.state.savedTitle} link ={this.state.savedLink} />
       <Jumbo></Jumbo>
       <MDBContainer className="pb-4">
         <MDBCard className="mb-5">
