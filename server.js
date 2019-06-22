@@ -19,7 +19,10 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
 // Set up Socket io
-const server = require("http").createServer(app)
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
 const io = require("socket.io")(server)
 
 io.on("connection", socket => {
@@ -29,5 +32,3 @@ io.on("connection", socket => {
   })
   socket.on("disconnect", () => console.log("Client disconnected."))
 })
-
-server.listen(PORT, () => console.log(`Socket/Express Sever now listening on PORT ${PORT}!`))
