@@ -1,7 +1,7 @@
-.alert.displayBox {
-    position: fixed;
-    top: 0;
-    z-index: 2;
-    width: 70vw;
-    left: 15vw;
+.alert {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 2 !important;
+    width: 70% !important;
+    left: 15% !important;
 }

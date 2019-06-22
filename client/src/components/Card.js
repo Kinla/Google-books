@@ -2,6 +2,15 @@ import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBRow } from 'mdbreact';
 
 const Card = (props) => {
+
+  const onClickHandler = (e) => {
+    if(props.saved){
+      props.bookUnsave(e)
+    }else{
+      props.bookSave(e)
+    }
+  }
+
   return (
     <MDBCol className="col-12">
       <MDBCard className="mb-3">
@@ -9,10 +18,19 @@ const Card = (props) => {
           <div className="d-flex flex-row">
             <MDBCardTitle className="flex-grow-1">{props.title}</MDBCardTitle>
             <div>
-              <MDBBtn size="sm" className="p-2 rounded-pill" href={props.link} target="_blank"><i class="fas fa-book-open"></i></MDBBtn>
+              <MDBBtn size="sm" className="p-2 rounded-pill" href={props.link} target="_blank"><i className="fas fa-book-open"></i></MDBBtn>
             </div>
-              {props.saved && <div><MDBBtn size="sm" className="p-2 rounded-pill" ><i className="fas fa-bookmark" id={props.id} onClick={(e) => {props.bookUnsave(e)}}></i></MDBBtn></div>}
-              {!props.saved && <div><MDBBtn size="sm" className="p-2 rounded-pill" ><i className="far fa-bookmark" id={props.id} onClick={(e) => {props.bookSave(e)}}></i></MDBBtn></div>}
+            {/* saved button */}
+            <div>
+              <MDBBtn 
+                onClick={(e) => {onClickHandler(e)}} 
+                id={props.id} 
+                size="sm" 
+                className="p-2 rounded-pill" >
+                  <i className={props.saved ? "fas fa-bookmark" : "far fa-bookmark"} id={props.id}></i>
+              </MDBBtn>
+            </div> 
+             
           </div>    
             <MDBCardText>
                 {props.author}
