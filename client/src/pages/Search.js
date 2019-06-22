@@ -3,7 +3,7 @@ import { MDBCard, MDBCardBody,  MDBCardTitle, MDBContainer, MDBRow } from 'mdbre
 import Jumbo from "../components/Jumbotron/index"
 import Form from "../components/Form"
 import Card from "../components/Card"
-import Alert from "../components/Alert"
+import Alert from "../components/Alert/Alert"
 import API from "../util/API"
 import io from "socket.io-client"
 
@@ -59,6 +59,7 @@ class Search extends Component {
   }
   
   handleBookSave = (e) => {
+    e.preventDefault()
     let id = e.target.id
     let newResults = this.state.results.map(el => {
       if (el.id === id){
@@ -73,6 +74,7 @@ class Search extends Component {
   }
 
   handleBookUnsave = (e) => {
+    e.preventDefault()
     let id = e.target.id
     let newResults = this.state.results.map(el => {
       if (el.id === id){
@@ -95,16 +97,24 @@ class Search extends Component {
     })
   }
 
+  dissmiss = (e) => {
+    e.preventDefault()
+    this.setState({
+      savedTitle: "",
+      savedLInk: "",
+      displayBox: false
+    })
+  }
+
   render() {
     return (
     <div>
       {
         this.state.displayBox ? 
-        <Alert title={this.state.savedTitle} link ={this.state.savedLink} />
+        <Alert title={this.state.savedTitle} link ={this.state.savedLink} dismiss={this.dissmiss}/>
         :
         null
       }
-      
       <Jumbo></Jumbo>
       <MDBContainer className="pb-4">
         <MDBCard className="mb-5">

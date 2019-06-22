@@ -1,0 +1,7 @@
+.alert.displayBox {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 70vw;
+    left: 15vw;
+}
