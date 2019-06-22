@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { MDBCard, MDBCardBody,  MDBCardTitle, MDBContainer, MDBRow } from 'mdbreact';
-import Jumbo from "../components/Jumbotron"
+import Jumbo from "../components/Jumbotron/index"
 import Form from "../components/Form"
 import Card from "../components/Card"
+import Alert from "../components/Alert"
 import API from "../util/API"
 
 class Search extends Component {
@@ -61,7 +62,6 @@ class Search extends Component {
       return el
     })
     this.setState({results: newResults})
-    console.log('saved')
   }
 
   handleBookUnsave = (e) => {
@@ -75,7 +75,6 @@ class Search extends Component {
       return el
     })
     this.setState({results: newResults})
-    console.log('unsaved')
   }
 
 

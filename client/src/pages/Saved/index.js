@@ -64,7 +64,7 @@ class Search extends Component {
     <MDBContainer className="pb-4 mt-5 mainContainer">
         <MDBCard className="">
             <MDBCardBody>
-                <MDBCardTitle className="h5 mb-3 cyan-text"><strong>My Book Nook</strong></MDBCardTitle>
+                <MDBCardTitle className="h5 mb-3 cyan-text"><strong>My Nook</strong></MDBCardTitle>
                 <MDBContainer >
                     <MDBRow>
                         {this.state.library.length === 0 && <p>Add some books to your library and start reading.</p>}

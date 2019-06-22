@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse
 } from "mdbreact";
+import "./style.css"
 
 class NavbarPage extends Component {
 state = {
@@ -19,9 +20,9 @@ toggleActive = (e) => {
 render() {
   console.log(window.location.pathname)
   return (
-      <MDBNavbar color="blue" dark expand="md">
+      <MDBNavbar color="blue" dark expand="sm">
         <MDBNavbarBrand>
-          <strong className="white-text">BookNook</strong>
+          <strong className="white-text bFont">B &#8226; Nook</strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>

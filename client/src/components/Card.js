@@ -21,7 +21,7 @@ const Card = (props) => {
             <MDBCol className="col-12 col-md-2">
                 <MDBCardImage className="img-fluid" src={props.image} waves />
             </MDBCol>
-            <MDBCol className="col-12 col-md-9">
+            <MDBCol className="col-12 col-md-10">
                 <MDBCardText>
                   {props.description}
                 </MDBCardText>

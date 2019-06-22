@@ -18,7 +18,16 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
-// Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+// Set up Socket io
+const server = require("http").createServer(app)
+const io = require("socket.io")(server)
+
+io.on("connection", socket => {
+  console.log("New client connected.")
+  socket.on("incoming data", data => {
+    socket.broadcast.emit("broadcast", data)
+  })
+  socket.on("disconnect", () => console.log("Client disconnected."))
+})
+
+server.listen(PORT, () => console.log(`Socket/Express Sever now listening on PORT ${PORT}!`))
