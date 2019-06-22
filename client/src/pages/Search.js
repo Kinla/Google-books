@@ -90,6 +90,7 @@ class Search extends Component {
         savedTitle: data.title, 
         savedLink: data.link,
       })
+      alert(`${this.state.savedTitle}. ${this.state.savedLink}`)
     })
   }
 

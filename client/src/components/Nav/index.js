@@ -18,7 +18,6 @@ toggleActive = (e) => {
 }
 
 render() {
-  console.log(window.location.pathname)
   return (
       <MDBNavbar color="blue" dark expand="sm">
         <MDBNavbarBrand>
