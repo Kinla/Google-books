@@ -15,7 +15,8 @@ class Search extends Component {
     bookTitle: "",
     results: [],
     savedTitle: "",
-    savedLink: ""
+    savedLink: "",
+    displayBox: false
   }
 
 
@@ -89,15 +90,21 @@ class Search extends Component {
       this.setState({
         savedTitle: data.title, 
         savedLink: data.link,
+        displayBox: true
       })
-      alert(`${this.state.savedTitle}. ${this.state.savedLink}`)
     })
   }
 
   render() {
     return (
     <div>
-      <Alert title={this.state.savedTitle} link ={this.state.savedLink} />
+      {
+        this.state.displayBox ? 
+        <Alert title={this.state.savedTitle} link ={this.state.savedLink} />
+        :
+        null
+      }
+      
       <Jumbo></Jumbo>
       <MDBContainer className="pb-4">
         <MDBCard className="mb-5">
