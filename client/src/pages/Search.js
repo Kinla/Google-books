@@ -7,13 +7,7 @@ import Alert from "../components/Alert"
 import API from "../util/API"
 import io from "socket.io-client"
 
-let connection
-if (process.env.PORT) {
-  connection = window.location.hostname
-} else {
-  connection = "http://localhost:3001"
-}
-const socket = io(connection)
+const socket = io()
 
 class Search extends Component {
 
