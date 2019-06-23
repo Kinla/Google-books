@@ -7,7 +7,7 @@ const AlertPage = (props) => {
       <MDBAlert color="dark" className="displayBox">
         <div className="d-flex flex-row">
             <div className="flex-grow-1">
-                Saved: <a href={props.link} target="_blank" rel="noopener noreferrer" className="alert-link"><strong>{props.title}</strong></a>.
+                Just saved: <a href={props.link} target="_blank" rel="noopener noreferrer" className="alert-link"><strong>{props.title}</strong></a>.
             </div>
             <div onClick={(e) => {props.dismiss(e)}}>
                 <i class="fas fa-times"></i>
