@@ -25,13 +25,17 @@ class Search extends Component {
     this.setState({bookTitle: value})
   }
   
-  handleFormSubmit = (event) => {
+  handleFormSubmit = async (event) => {
     event.preventDefault()
     const bookTitle = this.state.bookTitle.split(" ").join("+")
 
+    let nook = await API.library()
+    
     API.search(bookTitle)
       .then(res => {
         let results = []
+        let savedId = nook.data.map(el => el.id)
+        
         res.data.items.forEach(el => {
           let book = {}
           let entry = el.volumeInfo
@@ -40,16 +44,25 @@ class Search extends Component {
           book.description = entry.description
           book.image = entry.imageLinks.thumbnail
           book.link = entry.infoLink
+
           if (typeof(entry.authors) === "object"){
             book.author = entry.authors.join(", ")
           } else {
             book.author = entry.authors
           }
+
           book.saved = false
+          if (savedId.indexOf(book.id) > -1){
+            book.saved = true
+          }
+
           for(var key in book){
             book[key] = (book[key] !== undefined) ? book[key] : 'Not available';
         }
-          results.push(book)
+          let bookKeys = results.map(el => el.id)
+          if (bookKeys.indexOf(book.id) === -1) {
+            results.push(book)
+          }
       });
         this.setState({results: results})
       })
