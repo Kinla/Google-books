@@ -13,6 +13,10 @@ Book Nook is a new React-based Google Books Search app. This app requires the us
   * MongoDB/Mongoose
   * Socket.io
   * Google Books API
+  * Heroku (for depolyment)
+  
+### Demo
+  ![demo](https://github.com/Kinla/Google-books/blob/master/bnook.gif)
 
 ## Improvements
   * Move all calls to Google Books API to the backend
